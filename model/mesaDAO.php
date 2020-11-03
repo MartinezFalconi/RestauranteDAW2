@@ -115,6 +115,33 @@ class MesaDAO {
         }
 
     }
+
+    public function viewMesas(){
+
+        try {
+            $cont = 0;
+            $query = "SELECT id_mesa FROM mesas";
+            $sentencia=$this->pdo->prepare($query);
+            $sentencia->execute();
+            $lista_mesas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($lista_mesas as $mesa) {
+                if ($cont%10==0) {
+                    echo "<tr>";
+                }
+                    $cont++;
+                    echo "<td>Mesa Nº ".$mesa['id_mesa']."</td>";
+                if ($cont%10==0) {
+                    echo "</tr>";
+                }
+            }
+
+        } catch (Exception $e) {
+
+            echo $e;
+        
+        }
+
+    }
 }
 //FernandezVico
 

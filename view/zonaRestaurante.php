@@ -23,12 +23,16 @@
     echo "</table>";
 
     if(isset($_REQUEST['id_mesa'])) {
+        
         echo $mesaDAO->update();
     }
     ?> 
 
     </tbody>
     </table>
+
+
+    <h1><a href='./regMesaHorarios.php'>HISTORICO</h1>
 </body>
 </html>
 
