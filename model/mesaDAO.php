@@ -183,6 +183,39 @@ class MesaDAO {
             echo $e;
         }
     } 
+
+    public function fixMesa(){
+        try {
+            $this->pdo->beginTransaction();
+            $id_mesa = $_REQUEST['id_mesa'];
+            $disp_mesa = $_REQUEST['disp_mesa'];
+            $capacidad_mesa = $_REQUEST['capacidad_mesa'];
+            $espacio = $_REQUEST['tipo_espacio'];
+            $capacidad_max = $_REQUEST['capacidad_max'];
+            $id_camarero = $_SESSION['camarero']->getId_camarero();
+
+            $url = "../view/zonaRestaurante.php?espacio={$espacio}";
+
+            if ($id_camarero == 5) {
+                $query = "UPDATE mesas SET mesas.capacidad_max = ?, mesas.capacidad_mesa = 0, mesas.id_camarero = ?, mesas.disp_mesa = 'Reparacion' WHERE id_mesa = ?";
+                
+                $sentencia=$this->pdo->prepare($query);
+                $sentencia->bindParam(1,$capacidad_max);
+                $sentencia->bindParam(2,$id_camarero);
+                $sentencia->bindParam(3,$id_mesa);
+                
+                $sentencia->execute();
+                $this->pdo->commit();
+                header('Location: '.$url);
+            }else {
+                echo "Usted no es de mantenimiento";
+            }
+
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            echo $e;
+        }
+    }
 }
 
 ?>

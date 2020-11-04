@@ -32,7 +32,7 @@
             } else if ($_REQUEST['disp_mesa'] == "Ocupada") {
                 $mesaDAO->updateEntrada();
             } else {
-                // TODO
+                $mesaDAO->fixMesa();
             }
         }
         ?>
