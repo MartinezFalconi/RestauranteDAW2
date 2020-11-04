@@ -11,7 +11,7 @@
     <?php
     require_once '../controller/sessionController.php';
     include_once '../model/mesaDAO.php';
-    echo "<a class='atras' href='./regMesaHorarios.php'>Atrás</a>";
+    echo "<a class='atras' href='./zonaRestaurante.php?espacio=Terraza'>Atrás</a>";
     $id_mesa = $_REQUEST['id_mesa'];
 
     if(isset($_REQUEST['id_mesa'])) {

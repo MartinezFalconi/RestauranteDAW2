@@ -40,7 +40,7 @@ class MesaDAO {
             // IMPRIMIMOS LAS MESAS SEGUN SU ESTADO
             if($estado == "Libre") {
                 echo "<td>";
-                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesaHorarios.php'><img src='../img/history.png' alt='historial'></a></p>";
+                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesa.php?id_mesa=$idMesa'><img src='../img/history.png' alt='historial'></a></p>";
                 echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesa.png'></img></a>";
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Camarero asignado: {$mesa['nombre_camarero']}</p>";
@@ -50,7 +50,7 @@ class MesaDAO {
                 echo "</td>";
             } else if ($estado == "Ocupada") {
                 echo "<td>";
-                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesaHorarios.php'><img src='../img/history.png' alt='historial'></a></p>";
+                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesa.php?id_mesa=$idMesa'><img src='../img/history.png' alt='historial'></a></p>";
                 echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaOcupada.png'></img></a>";
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Camarero asignado: {$mesa['nombre_camarero']}</p>";
@@ -60,7 +60,7 @@ class MesaDAO {
                 echo "</td>";
             } else {
                 echo "<td>";
-                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesaHorarios.php'><img src='../img/history.png' alt='historial'></a></p>";
+                echo "<p class='pHistorico'><a class='aHistorico' href='./regMesa.php?id_mesa=$idMesa'><img src='../img/history.png' alt='historial'></a></p>";
                 echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Capacidad máxima: {$mesa['capacidad_max']} personas</p>";
@@ -124,11 +124,13 @@ class MesaDAO {
             $sentencia->bindParam(2,$disp_mesa);
             $sentencia->bindParam(3,$id_mesa);
             $sentencia->execute();
+            echo $query;
             
-            $query = "UPDATE horario SET hora_salida = NOW() WHERE id_mesa = ? AND hora_entrada = (SELECT MAX(hora_entrada) FROM horario)";
+            $query = "UPDATE horario SET hora_salida = NOW() WHERE id_mesa = ? AND hora_entrada = (SELECT MAX(hora_entrada) FROM horario);";
             $sentencia=$this->pdo->prepare($query);
             $sentencia->bindParam(1,$id_mesa);
             $sentencia->execute();
+            echo $query;
 
             $this->pdo->commit();
             header('Location: '.$url);
