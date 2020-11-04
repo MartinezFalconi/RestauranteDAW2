@@ -19,6 +19,7 @@
             
         <?php
         include_once '../model/mesaDAO.php';
+        $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
 
         $mesaDAO = new MesaDAO();
         echo "<table id='table'>";

@@ -15,6 +15,7 @@ class MesaDAO {
     public function getMesas() {
         $nombre_camarero = $_SESSION['camarero']->getNombre_camarero();
         $con = 0;
+        $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
 
         if(isset($_REQUEST['espacio'])){
             $tipoEspacio=$_REQUEST['espacio'];
@@ -56,7 +57,11 @@ class MesaDAO {
                 echo "</td>";
             } else {
                 echo "<td>";
-                echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
+                if ($idMantenimiento != NULL){
+                    echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
+                } else {
+                    echo "<img src='../img/mesaReparacion.png'></img>";
+                }
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Capacidad máxima: {$mesa['capacidad_max']} personas</p>";
                 echo "</td>";
@@ -193,10 +198,11 @@ class MesaDAO {
             $espacio = $_REQUEST['tipo_espacio'];
             $capacidad_max = $_REQUEST['capacidad_max'];
             $id_camarero = $_SESSION['camarero']->getId_camarero();
+            $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
 
             $url = "../view/zonaRestaurante.php?espacio={$espacio}";
 
-            if ($id_camarero == 5) {
+            if ($idMantenimiento != NULL) {
                 $query = "UPDATE mesas SET mesas.capacidad_max = ?, mesas.capacidad_mesa = 0, mesas.id_camarero = ?, mesas.disp_mesa = 'Reparacion' WHERE id_mesa = ?";
                 
                 $sentencia=$this->pdo->prepare($query);

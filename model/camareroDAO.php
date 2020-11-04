@@ -19,6 +19,7 @@ class camareroDAO {
         $numRow=$sentencia->rowCount();
         if(!empty($numRow) && $numRow==1){
             $camarero->setId_camarero($result['id_camarero']);
+            $camarero->setIdMantenimiento($result['idMantenimiento']);
             session_start();
             $_SESSION['camarero']=$camarero;
             return true;
