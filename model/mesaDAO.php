@@ -177,11 +177,13 @@ class MesaDAO {
             $sentencia->execute();
             $lista_horas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+            echo "<tr><td colspan='3' style='text-align: center; font-size: 55px'>Mesa nº: {$id_mesa}</td></tr>";
+
             foreach ($lista_horas as $hora) {
-                    echo "<tr>";
-                    echo "<td>Hora entrada: {$hora['hora_entrada']}</td>";
-                    echo "<td>Hora salida: {$hora['hora_salida']}</td>";
-                    echo "</tr>";
+                echo "<tr>";
+                echo "<td>Hora entrada: {$hora['hora_entrada']}</td>";
+                echo "<td>Hora salida: {$hora['hora_salida']}</td>";
+                echo "</tr>";
             }
 
             $this->pdo->commit();

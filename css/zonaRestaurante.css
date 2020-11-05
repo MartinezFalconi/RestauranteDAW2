@@ -95,3 +95,94 @@ body {
     width: 35px!important;
     height: auto!important;
 }
+
+
+/* BOTON ATRAS */
+
+.atras {
+    margin-top: 20px;
+    margin-left: 55px;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+
+.atras:hover {
+    background-color: white;
+    color: black;
+}
+
+
+/* TABLA DATOS HISTORICO */
+
+#tableHistorical {
+    margin: 55px auto;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+#tableHistorical td {
+    margin: 55px auto;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* FORMULARIO EDITAR MESA */
+
+.editar {
+    width: 300px;
+    padding: 183px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: transparent;
+}
+
+.editar form {
+    text-align: center;
+}
+
+form input[type="text"] {
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+input[type="submit"] {
+    width: 80%;
+    margin: 0;
+    margin-top: 15px;
+}
+
+.edit {
+    background-color: #c67e2c;
+    border: 1px solid #c67e2c;
+    border-radius: 20px;
+    margin: 15px;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 200px;
+}
+
+label {
+    color: white;
+    font-size: 19px;
+}
+
+select {
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 10px;
+    width: 186px;
+    margin-bottom: 15px;
+}

@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/code.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/zonaRestaurante.css">
     <title>Editar mesa</title>
 </head>
 <body>
-    <a class="atras" href="./zonaRestaurante.php?espacio=Terraza">Atrás</a>
-    <?php
+    <div class="nav"> 
+        <a class='atras' href='./zonaRestaurante.php?espacio=Terraza'>Atrás</a>
+        <?php
         require_once '../controller/sessionController.php';
+        ?>
+    </div>
+    
+    <?php
         include_once '../model/mesaDAO.php';
         $mDAO = new MesaDAO();
         $pdo = $mDAO->getPDO();
