@@ -9,6 +9,7 @@
 
     <body>
     <div class="nav"> 
+        <!-- CONTROL DE SESIONES Y BOTONES -->
         <a class='atras' href='./zonaRestaurante.php?espacio=Terraza'>Atrás</a>
         <?php
         require_once '../controller/sessionController.php';
@@ -19,6 +20,8 @@
     include_once '../model/mesaDAO.php';
     $id_mesa = $_REQUEST['id_mesa'];
 
+    // COMPROBAMOS QUE ESTE INICIALIZADA LA VARIABLE, SI LO ESTÁ, NOS MUESTRA UNA TABLA CON EL HISTORICO DE LA MESA
+    // SINO ESTÁ INICIALIZADA, IMPRIME UN MENSAJE DEFAULT
     if(isset($_REQUEST['id_mesa'])) {
         $mesaDAO = new MesaDAO();
         echo "<table id='tableHistorical' style='border-spacing: 55px'>";

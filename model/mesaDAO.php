@@ -1,17 +1,23 @@
 <?php
 require_once 'mesa.php';
 class MesaDAO {
+    // ATRIBUTOS
     private $pdo;
 
+    // CONSTRUCTOR
     public function __construct(){
         include '../db/connection.php';
         $this->pdo=$pdo;
     }
 
+    // CREAMOS UN GETTER PARA EL PDO
     public function getPDO() {
         return $this->pdo;
     }
 
+    // METODO PARA OBTENER EL CUERPO DE LA TABLA (SITUADA EN zonaRestaurante.php)
+    // GRACIAS A ESTE METODO, PODEMOS FILTRAR LAS MESAS QUE QUEREMOS MOSTRAR EN LA TABLA SEGUN EL ESPACIO
+    // EN EL CUAL SE ENCUENTRA LA MESA
     public function getMesas() {
         $nombre_camarero = $_SESSION['camarero']->getNombre_camarero();
         $con = 0;
@@ -72,6 +78,11 @@ class MesaDAO {
         }
     }
 
+    // CON ESTE METODO CONTROLAMOS:
+    // 1- QUE CAMARERO SE ESTA HACIENDO CARGO DE LA MESA
+    // 2- PASAR EL ESTADO DE LA MESA A OCUPADO
+    // 3- CUANTOS COMENSALES TENEMOS EN LA MESA
+    // 4- LA HORA DE ENTRADA DE LOS COMENSALES
     public function updateEntrada() {
         try {
             include '../controller/sessionController.php';
@@ -108,6 +119,11 @@ class MesaDAO {
         }
     }
     
+    // CON ESTE METODO CONTROLAMOS:
+    // 1- QUITAR EL ENCARGADO DE LA MESA
+    // 2- PASAR EL ESTADO DE LA MESA A LIBRE
+    // 3- PONER 0 COMENSALES EN LA MESA
+    // 4- LA HORA DE SALIDA DE LOS COMENSALES
     public function updateSalida() {
         try {
             $this->pdo->beginTransaction();
@@ -140,37 +156,14 @@ class MesaDAO {
             echo $e;
         }
     }
-    
-    public function viewMesas() {
-        try {
-            $cont = 0;
-            $query = "SELECT id_mesa FROM mesas";
-            $sentencia=$this->pdo->prepare($query);
-            $sentencia->execute();
-            $lista_mesas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($lista_mesas as $mesa) {
-                if ($cont%10==0) {
-                    echo "<tr>";
-                }
-                    $cont++;
-                    echo "<td><a href='./regMesa.php?id_mesa={$mesa['id_mesa']}'>Mesa Nº ".$mesa['id_mesa']."</a></td>";
-                if ($cont%10==0) {
-                    echo "</tr>";
-                }
-            }
 
-        } catch (Exception $e) {
-
-            echo $e;
-        
-        }
-    }
-
+    // ESTE METODO NOS PERMITE VER EL HISTORIAL DE LA MESA, ES DECIR, HORAS/DIAS DE ENTRADA Y SALIDA
     public function viewHistorical() {
         try {
             $this->pdo->beginTransaction();
             $id_mesa = $_REQUEST['id_mesa'];
 
+            // CON ESTA QUERY NUESTRO OBJETIVO ES TENER UN CUERPO DE TABLA DINÁMICA
             $query = "SELECT hora_entrada, hora_salida FROM horario WHERE id_mesa = ?";
             $sentencia=$this->pdo->prepare($query);
             $sentencia->bindParam(1,$id_mesa);
@@ -179,11 +172,19 @@ class MesaDAO {
 
             echo "<tr><td colspan='3' style='text-align: center; font-size: 55px'>Mesa nº: {$id_mesa}</td></tr>";
 
-            foreach ($lista_horas as $hora) {
-                echo "<tr>";
-                echo "<td>Hora entrada: {$hora['hora_entrada']}</td>";
-                echo "<td>Hora salida: {$hora['hora_salida']}</td>";
-                echo "</tr>";
+            // EN EL CASO DE ESTAR VACIA LA "LISTA" NOS IMPRIME UN MENSAJE, DE LO CONTRARIO, NOS MUESTRA EL HISTORICO
+            if($lista_horas==null){
+                echo "<table id='tableHistorical' style='border-spacing: 55px'>";
+                echo "<tr><td colspan='3' style='text-align: center; font-size: 55px'>Esta mesa no tiene registros.</td></tr>";
+                echo "</table>";
+            } else {
+                // MOSTRAMOS TODOS LOS REGISTROS DE LA MESA
+                foreach ($lista_horas as $hora) {
+                    echo "<tr>";
+                    echo "<td>Hora entrada: {$hora['hora_entrada']}</td>";
+                    echo "<td>Hora salida: {$hora['hora_salida']}</td>";
+                    echo "</tr>";
+                }
             }
 
             $this->pdo->commit();
