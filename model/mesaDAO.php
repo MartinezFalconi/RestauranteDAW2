@@ -19,8 +19,8 @@ class MesaDAO {
     // GRACIAS A ESTE METODO, PODEMOS FILTRAR LAS MESAS QUE QUEREMOS MOSTRAR EN LA TABLA SEGUN EL ESPACIO
     // EN EL CUAL SE ENCUENTRA LA MESA
     public function getMesas() {
-        $nombre_camarero = $_SESSION['camarero']->getNombre_camarero();
         $con = 0;
+        $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
 
         if(isset($_REQUEST['espacio'])){
             $tipoEspacio=$_REQUEST['espacio'];
@@ -67,8 +67,18 @@ class MesaDAO {
             } else {
                 echo "<td>";
                 echo "<p class='pHistorico'><a class='aHistorico' href='./regMesa.php?id_mesa=$idMesa'><img src='../img/history.png' alt='historial'></a></p>";
-                echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
+                // echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
+                if ($idMantenimiento != NULL){
+                    echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
+                    echo $idMantenimiento;
+                } else {
+                    echo "<img src='../img/mesaReparacion.png'></img>";
+                    echo $idMantenimiento;
+                }
                 echo "<p>Nº mesa: $idMesa</p>";
+                echo "<p>Camarero asignado: {$mesa['nombre_camarero']}</p>";
+                echo "<p>Comensal/es: {$mesa['capacidad_mesa']}</p>";
+                echo "<p>Reparación</p>";
                 echo "<p>Capacidad máxima: {$mesa['capacidad_max']} personas</p>";
                 echo "</td>";
             }
@@ -192,7 +202,40 @@ class MesaDAO {
             $this->pdo->rollBack();
             echo $e;
         }
-    } 
+    }
+
+    // ESTE METODO PERMITIRA A LAS PERSONAS DE MANTENIMIENTO MODIFICAR EL ESTADO DE LA MESA A REPARACIÓN
+    public function fixMesa(){
+        try {
+            $this->pdo->beginTransaction();
+            $id_mesa = $_REQUEST['id_mesa'];
+            $espacio = $_REQUEST['tipo_espacio'];
+            $capacidad_max = $_REQUEST['capacidad_max'];
+            $id_camarero = $_SESSION['camarero']->getId_camarero();
+            $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
+
+            $url = "../view/zonaRestaurante.php?espacio={$espacio}";
+
+            if ($idMantenimiento != NULL) {
+                $query = "UPDATE mesas SET mesas.capacidad_max = ?, mesas.capacidad_mesa = 0, mesas.id_camarero = ?, mesas.disp_mesa = 'Reparacion' WHERE id_mesa = ?";
+                
+                $sentencia=$this->pdo->prepare($query);
+                $sentencia->bindParam(1,$capacidad_max);
+                $sentencia->bindParam(2,$id_camarero);
+                $sentencia->bindParam(3,$id_mesa);
+                
+                $sentencia->execute();
+                $this->pdo->commit();
+                header('Location: '.$url);
+            }else {
+                echo "Usted no es de mantenimiento";
+            }
+
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            echo $e;
+        }
+    }
 }
 
 ?>

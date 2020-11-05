@@ -66,9 +66,15 @@
             ?>
         </select><br>
         
-        <label for="capacidad_max">Capacidad máxima:</label><br>
-        <input type="text" id="capacidad_max" name="capacidad_max" value="<?php echo $mesa['capacidad_max'];?>" readonly><br>
-        
+        <?php
+
+            $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
+            if ($idMantenimiento != NULL) {
+                echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}'><br>";
+            } else {
+                echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}' readonly><br>";
+            }
+        ?>
         <label for="capacidad_mesa">Capacidad actual:</label><br>
         <input type="text" id="capacidad_mesa" name="capacidad_mesa" value="<?php echo $mesa['capacidad_mesa'];?>"><br>
         
