@@ -1,4 +1,5 @@
 <?php
+// CONEXIÓN A LA BASE DE DDATOS MEDIANTE PDO
 include 'config.php';
 try {
     $dsn = "mysql:host=".SERVIDOR.";dbname=".BD;

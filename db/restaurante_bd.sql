@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `restaurante_bd`
 --
-
+CREATE DATABASE restaurante_bd;
+use restaurante_bd;
 -- --------------------------------------------------------
 
 --

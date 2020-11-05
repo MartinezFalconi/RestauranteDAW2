@@ -1,3 +1,4 @@
+// CONTROLAMOS QUE LOS VALORES DEL FORMULARIO ESTEN EN UNOS RANGOS CORRECTOS
 function validacionCapacidad() {
     var cMax = document.getElementById('capacidad_max').value;
     var c = document.getElementById('capacidad_mesa').value;
