@@ -250,3 +250,14 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/*
+UPDATE horario, (SELECT hora_entrada FROM horario
+                WHERE hora_entrada IN (SELECT hora_entrada FROM horario
+                                      WHERE MAX(hora_entrada)))
+                AS modHora
+SET horario.hora_entrada = horario.modHora
+WHERE id_mesa = 15
+*/
