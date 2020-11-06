@@ -10,6 +10,6 @@ if (!isset($_SESSION['camarero'])) {
 }
 
 // MENSAJE DE BIENVENIDA Y BOTON LOGOUT
-echo '<h1>Bienvenido '.$_SESSION['camarero']->getNombre_camarero().'</h1><a href="../controller/logoutController.php">Logout</a>';
+echo '<img class="logo" src="../img/logo.png" alt="Logo restaurante"><h1>Bienvenido '.$_SESSION['camarero']->getNombre_camarero().'</h1><a href="../controller/logoutController.php">Logout</a>';
 
 ?>

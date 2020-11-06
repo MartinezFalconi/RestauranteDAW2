@@ -1,7 +1,7 @@
 // CONTROLAMOS QUE LOS VALORES DEL FORMULARIO ESTEN EN UNOS RANGOS CORRECTOS
 function validacionCapacidad() {
-    var cMax = document.getElementById('capacidad_max').value;
-    var c = document.getElementById('capacidad_mesa').value;
+    var cMax = parseInt(document.getElementById('capacidad_max').value);
+    var c = parseInt(document.getElementById('capacidad_mesa').value);
     var disponible = document.getElementById('disp_mesa').value;
     var msg = document.getElementById('msg');
 

@@ -137,16 +137,14 @@ class MesaDAO {
             $this->pdo->beginTransaction();
             $id_mesa = $_REQUEST['id_mesa'];
             $disp_mesa = $_REQUEST['disp_mesa'];
-            $capacidad_mesa = $_REQUEST['capacidad_mesa'];
             $espacio = $_REQUEST['tipo_espacio'];
             
             $url = "../view/zonaRestaurante.php?espacio={$espacio}";
             
-            $query="UPDATE mesas SET mesas.capacidad_mesa = ?, mesas.id_camarero = NULL, mesas.disp_mesa = ? WHERE id_mesa = ?;";
+            $query="UPDATE mesas SET mesas.capacidad_mesa = 0, mesas.id_camarero = NULL, mesas.disp_mesa = ? WHERE id_mesa = ?;";
             $sentencia=$this->pdo->prepare($query);
-            $sentencia->bindParam(1,$capacidad_mesa);
-            $sentencia->bindParam(2,$disp_mesa);
-            $sentencia->bindParam(3,$id_mesa);
+            $sentencia->bindParam(1,$disp_mesa);
+            $sentencia->bindParam(2,$id_mesa);
             $sentencia->execute();
             
             $query = "UPDATE horario, (SELECT MAX(hora_entrada) AS maximo FROM horario WHERE id_mesa = ?) AS tmax
