@@ -70,10 +70,8 @@ class MesaDAO {
                 // echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
                 if ($idMantenimiento != NULL){
                     echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
-                    echo $idMantenimiento;
                 } else {
                     echo "<img src='../img/mesaReparacion.png'></img>";
-                    echo $idMantenimiento;
                 }
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Camarero asignado: {$mesa['nombre_camarero']}</p>";

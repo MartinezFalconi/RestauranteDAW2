@@ -21,3 +21,30 @@ function validacionCapacidad() {
         return true;
     }
 }
+
+function validacionLogin() {
+    var user = document.getElementById('user').value;
+    var pass = document.getElementById('pass').value;
+    var userTag = document.getElementsByTagName('p')[0];
+    var passTag = document.getElementsByTagName('p')[1];
+
+    if (user == "" && pass == "") {
+        userTag.style.color = "red";
+        passTag.style.color = "red";
+        document.getElementById('user').style.borderColor = "red";
+        document.getElementById('pass').style.borderColor = "red";
+    } else if (user == "") {
+        userTag.style.color = "red";
+        passTag.style.color = "white";
+        document.getElementById('user').style.borderColor = "red";
+        document.getElementById('pass').style.borderColor = "white";
+    } else if (pass == "") {
+        userTag.style.color = "white";
+        passTag.style.color = "red";
+        document.getElementById('user').style.borderColor = "white";
+        document.getElementById('pass').style.borderColor = "red";
+    } else {
+        return true;
+    }
+    return false;
+}
