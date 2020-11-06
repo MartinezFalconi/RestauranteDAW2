@@ -3,16 +3,20 @@ require_once '../model/camarero.php';
 require_once '../model/camareroDAO.php';
 
 if (isset($_POST['user'])) {
-    //linea 6 rellena el construct de la clase camarero crea objeto.
+    // INSTANCIAMOS LA CLASE CAMARERO
     $camarero = new camarero($_POST['user'], md5($_POST['pass']));
-    //establece conexion con base de datos y ejecura la query, despues de comprobar la info en camareroDAO.php
+    // INSTANCIAMOS LA CLASE CAMARERODAO
     $camareroDAO = new camareroDAO();
+    // LLAMAMOS AL METODO QUE ENCONTRAMOS EN CAMARERODAO, PARA VALIDAR EL CAMARERO
     if($camareroDAO->login($camarero)){
+        // EN CASO DE TRUE NOS REDIRIGE A LA PAGINA PRINCIPAL
         header('Location:../view/zonaRestaurante.php?espacio=Terraza');
     }else {
+        // EN CASO DE FALSE NOS REDIRIGE AL LOGIN
         header('Location:../view/login.php');
     }
 }else {
+    // SI LA VARIABLE USER NO ESTA INICIALIZADA NOS REDIRIGE AL LOGIN
     header('Location:../view/login.php');
 }
 

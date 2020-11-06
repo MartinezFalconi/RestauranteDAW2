@@ -1,12 +1,7 @@
 <?php
-//MartinezFalconi
+// DESTRUIMOS LA SESIÓN Y NOS REDIRIGE A INDEX.PHP
 session_start();
-//mata la sesion iniciada
 session_destroy();
 header('Location:../index.php');
-
-//JaramilloVives
-
-//FernandezVico
 
 ?>
