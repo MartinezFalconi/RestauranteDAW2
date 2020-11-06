@@ -70,8 +70,10 @@
 
             $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
             if ($idMantenimiento != NULL) {
+                echo "<label for='capacidad_max'>Capacidad máxima:</label><br>";
                 echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}'><br>";
             } else {
+                echo "<label for='capacidad_max'>Capacidad máxima:</label><br>";
                 echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}' readonly><br>";
             }
         ?>

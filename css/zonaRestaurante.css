@@ -122,6 +122,10 @@ body {
     font-size: 25px;
     font-weight: bold;
     color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid white;
+    border-radius: 15px;
+    padding-bottom: 25px;
 }
 
 #tableHistorical td {
@@ -144,6 +148,11 @@ body {
 
 .editar form {
     text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 25px;
 }
 
 form input[type="text"] {
@@ -184,4 +193,32 @@ select {
     padding: 10px;
     width: 186px;
     margin-bottom: 15px;
+}
+
+
+/* MENSAJE CUANDO QUIERES PONER EN LIBRE Y NO ERES DE MANTENIMIENTO */
+
+.msgMantenimiento {
+    text-align: center;
+    font-size: 55px;
+    color: white;
+}
+
+.btnVolver {
+    color: white;
+    text-decoration: none!important;
+    border: 1px solid white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+
+.btnVolver:hover {
+    background-color: white;
+    color: black;
+}
+
+.btnVolverDiv {
+    text-align: center;
 }
