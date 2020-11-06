@@ -43,44 +43,97 @@
         <label for="disp_mesa">Disponibilidad:</label><br>
         <select name="disp_mesa" id="disp_mesa">
             <?php
-            // CONTROLAMOS LAS OPCIONES DEL TAG OPTION, ASÍ CONSEGUIMOS QUE LA PRIMERA OPCIÓN SEA LA ACTUAL DE LA MESA
-            $id = $_REQUEST['id_mesa'];
-            $query = "SELECT disp_mesa FROM mesas WHERE id_mesa = $id;";
-            $sentencia = $pdo->prepare($query);
-            $sentencia->execute();
-            $dMesa = $sentencia->fetch(PDO::FETCH_ASSOC);
-            $dMesa['disp_mesa'];
-            if($dMesa['disp_mesa'] == "Libre") {
-                echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
-                echo "<option value='Ocupada'>Ocupada</option>";
-                echo "<option value='Reparacion'>Reparación</option>";
-            } else if ($dMesa['disp_mesa'] == "Ocupada") {
-                echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
-                echo "<option value='Libre'>Libre</option>";
-                echo "<option value='Reparacion'>Reparación</option>";
-            } else if ($dMesa['disp_mesa'] == "Reparacion") {
-                echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
-                echo "<option value='Libre'>Libre</option>";
-                echo "<option value='Ocupada'>Ocupada</option>";
-            }
-            ?>
-        </select><br>
-        
-        <?php
 
-            $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
-            if ($idMantenimiento != NULL) {
-                echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}'><br>";
-            } else {
-                echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}' readonly><br>";
-            }
-        ?>
-        <label for="capacidad_mesa">Capacidad actual:</label><br>
-        <input type="text" id="capacidad_mesa" name="capacidad_mesa" value="<?php echo $mesa['capacidad_mesa'];?>"><br>
-        
-        <input class="edit" type="submit" value="Update">
-        <p id="msg"></p>
-        </form>
+                $idMantenimiento = $_SESSION['camarero']->getIdMantenimiento();
+                if ($idMantenimiento != NULL && $idMantenimiento != 2) {
+                    $id = $_REQUEST['id_mesa'];
+                    $query = "SELECT disp_mesa FROM mesas WHERE id_mesa = $id;";
+                    $sentencia = $pdo->prepare($query);
+                    $sentencia->execute();
+                    $dMesa = $sentencia->fetch(PDO::FETCH_ASSOC);
+                    $dMesa['disp_mesa'];
+                    // CONTROLAMOS LAS OPCIONES DEL TAG OPTION, ASÍ CONSEGUIMOS QUE LA PRIMERA OPCIÓN SEA LA ACTUAL DE LA MESA
+                        if($dMesa['disp_mesa'] == "Libre") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Ocupada'>Ocupada</option>";
+                            echo "<option value='Reparacion'>Reparación</option>";
+                        } else if ($dMesa['disp_mesa'] == "Ocupada") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Libre'>Libre</option>";
+                            echo "<option value='Reparacion'>Reparación</option>";
+                        } else if ($dMesa['disp_mesa'] == "Reparacion") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Libre'>Libre</option>";
+                            echo "<option value='Ocupada'>Ocupada</option>";
+                        }    
+                    echo "</select><br>";
+                    echo "<label for='capacidad_max'>Capacidad Máxima:</label><br>";
+                    echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}'><br>";
+
+                    if ($dMesa['disp_mesa'] != "Ocupada"){
+                        echo "<label for='capacidad_mesa'>Capacidad actual:</label><br>";
+                        echo "<input type='text' id='capacidad_mesa' name='capacidad_mesa' value='{$mesa['capacidad_mesa']}'><br>";
+                    }
+                    
+                    echo "<input class='edit' type='submit' value='Update'>";
+                    echo "<p id='msg'></p>";
+                    echo "</form>";
+                }else if ($idMantenimiento == 2) {
+                    $id = $_REQUEST['id_mesa'];
+                    $query = "SELECT disp_mesa FROM mesas WHERE id_mesa = $id;";
+                    $sentencia = $pdo->prepare($query);
+                    $sentencia->execute();
+                    $dMesa = $sentencia->fetch(PDO::FETCH_ASSOC);
+                    $dMesa['disp_mesa'];
+                        if($dMesa['disp_mesa'] == "Libre") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Reparacion'>Reparación</option>";
+                        }else if ($dMesa['disp_mesa'] == "Reparacion") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Libre'>Libre</option>";
+                        }    
+                    echo "</select><br>";
+                    echo "<label for='capacidad_max'>Capacidad Máxima:</label><br>";
+                    echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}'><br>";
+                    
+                    echo "<input class='edit' type='submit' value='Update'>";
+                    echo "<p id='msg'></p>";
+                    echo "</form>";
+                }else{
+                    $id = $_REQUEST['id_mesa'];
+                    $query = "SELECT disp_mesa FROM mesas WHERE id_mesa = $id;";
+                    $sentencia = $pdo->prepare($query);
+                    $sentencia->execute();
+                    $dMesa = $sentencia->fetch(PDO::FETCH_ASSOC);
+                    $dMesa['disp_mesa'];
+                        if($dMesa['disp_mesa'] == "Libre") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Ocupada'>Ocupada</option>";
+                            echo "<option value='Reparacion'>Reparación</option>";
+                        } else if ($dMesa['disp_mesa'] == "Ocupada") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Libre'>Libre</option>";
+                            echo "<option value='Reparacion'>Reparación</option>";
+                        } else if ($dMesa['disp_mesa'] == "Reparacion") {
+                            echo "<option value='{$dMesa['disp_mesa']}'>{$dMesa['disp_mesa']}</option>";
+                            echo "<option value='Libre'>Libre</option>";
+                            echo "<option value='Ocupada'>Ocupada</option>";
+                        }    
+                    echo "</select><br>";
+                    echo "<label for='capacidad_max'>Capacidad Máxima:</label><br>";
+                    echo "<input type='text' id='capacidad_max' name='capacidad_max' value='{$mesa['capacidad_max']}' readonly><br>";
+                    echo $dMesa['disp_mesa'];
+
+                    if ($dMesa['disp_mesa'] != "Ocupada"){
+                        echo "<label for='capacidad_mesa'>Capacidad actual:</label><br>";
+                        echo "<input type='text' id='capacidad_mesa' name='capacidad_mesa' value='{$mesa['capacidad_mesa']}'><br>";
+                    }
+                    
+                    echo "<input class='edit' type='submit' value='Update'>";
+                    echo "<p id='msg'></p>";
+                    echo "</form>";
+                }
+            ?>
     </div>
 </body>
 </html>

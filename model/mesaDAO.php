@@ -70,10 +70,8 @@ class MesaDAO {
                 // echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
                 if ($idMantenimiento != NULL){
                     echo "<a href='../view/editMesa.php?id_mesa={$idMesa}'><img src='../img/mesaReparacion.png'></img></a>";
-                    echo $idMantenimiento;
                 } else {
                     echo "<img src='../img/mesaReparacion.png'></img>";
-                    echo $idMantenimiento;
                 }
                 echo "<p>Nº mesa: $idMesa</p>";
                 echo "<p>Camarero asignado: {$mesa['nombre_camarero']}</p>";
@@ -139,16 +137,14 @@ class MesaDAO {
             $this->pdo->beginTransaction();
             $id_mesa = $_REQUEST['id_mesa'];
             $disp_mesa = $_REQUEST['disp_mesa'];
-            $capacidad_mesa = $_REQUEST['capacidad_mesa'];
             $espacio = $_REQUEST['tipo_espacio'];
             
             $url = "../view/zonaRestaurante.php?espacio={$espacio}";
             
-            $query="UPDATE mesas SET mesas.capacidad_mesa = ?, mesas.id_camarero = NULL, mesas.disp_mesa = ? WHERE id_mesa = ?;";
+            $query="UPDATE mesas SET mesas.capacidad_mesa = 0, mesas.id_camarero = NULL, mesas.disp_mesa = ? WHERE id_mesa = ?;";
             $sentencia=$this->pdo->prepare($query);
-            $sentencia->bindParam(1,$capacidad_mesa);
-            $sentencia->bindParam(2,$disp_mesa);
-            $sentencia->bindParam(3,$id_mesa);
+            $sentencia->bindParam(1,$disp_mesa);
+            $sentencia->bindParam(2,$id_mesa);
             $sentencia->execute();
             echo $query;
             

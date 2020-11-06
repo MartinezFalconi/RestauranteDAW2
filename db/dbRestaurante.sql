@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2020 a las 19:07:30
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Tiempo de generación: 06-11-2020 a las 15:13:09
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -22,7 +21,7 @@ SET time_zone = "+00:00";
 -- Base de datos: `restaurante_bd`
 --
 CREATE DATABASE restaurante_bd;
-use restaurante_bd;
+USE restaurante_bd;
 -- --------------------------------------------------------
 
 --
@@ -41,10 +40,10 @@ CREATE TABLE `camareros` (
 --
 
 INSERT INTO `camareros` (`id_camarero`, `nombre_camarero`, `pass_camarero`, `idMantenimiento`) VALUES
-(2, 'Xavier', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
-(3, 'Sergio', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
-(4, 'Judit', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
-(5, 'marc', '81dc9bdb52d04dc20036dbd8313ed055', 1);
+(1, 'Xavier', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
+(2, 'Sergio', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
+(3, 'Judit', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
+(4, 'Marc', '81dc9bdb52d04dc20036dbd8313ed055', 1);
 
 -- --------------------------------------------------------
 
@@ -79,19 +78,6 @@ CREATE TABLE `horario` (
   `hora_salida` datetime NOT NULL,
   `id_mesa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `horario`
---
-
-INSERT INTO `horario` (`id_horario`, `hora_entrada`, `hora_salida`, `id_mesa`) VALUES
-(4, '2020-11-03 16:37:35', '2020-11-03 16:37:56', 2),
-(5, '2020-11-03 16:38:15', '2020-11-03 16:38:26', 2),
-(6, '2020-11-03 17:23:12', '2020-11-03 17:24:00', 4),
-(7, '2020-11-03 17:26:43', '2020-11-03 17:31:05', 4),
-(8, '2020-11-03 17:44:24', '0000-00-00 00:00:00', 5),
-(9, '2020-11-03 19:18:17', '2020-11-04 18:08:15', 4),
-(10, '2020-11-04 18:59:12', '2020-11-04 19:01:03', 5);
 
 -- --------------------------------------------------------
 
@@ -131,26 +117,26 @@ CREATE TABLE `mesas` (
 --
 
 INSERT INTO `mesas` (`id_mesa`, `capacidad_mesa`, `capacidad_max`, `disp_mesa`, `id_camarero`, `id_espacio`) VALUES
-(1, '0', '6', 'Libre', NULL, 1),
-(2, '0', '6', 'Libre', NULL, 1),
-(3, '0', '6', 'Reparacion', 5, 1),
-(4, '0', '6', 'Libre', NULL, 2),
-(5, '0', '6', 'Libre', NULL, 2),
-(6, '0', '6', 'Reparacion', 5, 2),
-(7, '0', '6', 'Libre', NULL, 2),
-(8, '0', '6', 'Libre', NULL, 2),
-(9, '0', '6', 'Libre', NULL, 2),
-(10, '0', '6', 'Libre', NULL, 2),
-(11, '0', '6', 'Libre', NULL, 2),
-(12, '0', '6', 'Libre', NULL, 2),
-(13, '0', '6', 'Libre', NULL, 2),
-(14, '0', '6', 'Libre', NULL, 2),
-(15, '5', '6', 'Ocupada', NULL, 3),
-(16, '0', '6', 'Libre', NULL, 3),
-(17, '3', '6', 'Ocupada', NULL, 3),
-(18, '0', '6', 'Libre', NULL, 3),
-(19, '0', '6', 'Libre', NULL, 3),
-(20, '0', '6', 'Libre', NULL, 3);
+(1, '0', '8', 'Libre', NULL, 1),
+(2, '0', '8', 'Libre', NULL, 1),
+(3, '0', '8', 'Libre', NULL, 1),
+(4, '0', '4', 'Libre', NULL, 2),
+(5, '0', '4', 'Libre', NULL, 2),
+(6, '0', '4', 'Libre', NULL, 2),
+(7, '0', '4', 'Libre', NULL, 2),
+(8, '0', '4', 'Libre', NULL, 2),
+(9, '0', '4', 'Libre', NULL, 2),
+(10, '0', '4', 'Libre', NULL, 2),
+(11, '0', '4', 'Libre', NULL, 2),
+(12, '0', '4', 'Libre', NULL, 2),
+(13, '0', '4', 'Libre', NULL, 2),
+(14, '0', '4', 'Libre', NULL, 2),
+(15, '0', '4', 'Libre', NULL, 3),
+(16, '0', '4', 'Libre', NULL, 3),
+(17, '0', '4', 'Libre', NULL, 3),
+(18, '0', '4', 'Libre', NULL, 3),
+(19, '0', '4', 'Libre', NULL, 3),
+(20, '0', '4', 'Libre', NULL, 3);
 
 --
 -- Índices para tablas volcadas
@@ -210,7 +196,7 @@ ALTER TABLE `espacio`
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
