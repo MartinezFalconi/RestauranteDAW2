@@ -8,15 +8,19 @@
     </head>
 
     <body>
-    <p class="Inici">Iniciar</p>
-    <div class="Registro">
-            <!-- FORMULARIO CON LOS DOS CAMPOS A RELLENAR (NOMBRE Y CONTRASEÑA), ESTE FORMULARIO SE VALIDA EN LOGINCONTROLLER.PHP -->
-            <!-- EL METODO UTILIZADO PARA ENVIAR LOS INPUTS ES POR POST -->
-            <form action="../controller/loginController.php" method="POST">
-                <p>Nombre de usuario: <input type="text" name="user" id="user" ></p>
-                <p>Contraseña: <input type="password" name="pass" id="pass" ></p>
-                <input type="submit" value="Iniciar sesión">
-            </form>
+    
+    <div class="registro">
+        <img class="logoLogin" src="../img/logo.png" alt="Logo restaurante">
+        <!-- FORMULARIO CON LOS DOS CAMPOS A RELLENAR (NOMBRE Y CONTRASEÑA), ESTE FORMULARIO SE VALIDA EN LOGINCONTROLLER.PHP -->
+        <!-- EL METODO UTILIZADO PARA ENVIAR LOS INPUTS ES POR POST -->
+        <form action="../controller/loginController.php" method="POST" onsubmit="return validacionLogin()">
+            <p>Nombre de usuario: </p>
+            <input type="text" name="user" id="user" >
+            <p>Contraseña: </p>
+            <input type="password" name="pass" id="pass" ><br>
+            <input type="submit" value="Iniciar sesión">
+        </form>
     </div>
+
     </body>
 </html>

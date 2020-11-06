@@ -1,7 +1,7 @@
 // CONTROLAMOS QUE LOS VALORES DEL FORMULARIO ESTEN EN UNOS RANGOS CORRECTOS
 function validacionCapacidad() {
-    var cMax = document.getElementById('capacidad_max').value;
-    var c = document.getElementById('capacidad_mesa').value;
+    var cMax = parseInt(document.getElementById('capacidad_max').value);
+    var c = parseInt(document.getElementById('capacidad_mesa').value);
     var disponible = document.getElementById('disp_mesa').value;
     var msg = document.getElementById('msg');
 
@@ -20,4 +20,31 @@ function validacionCapacidad() {
     } else {
         return true;
     }
+}
+
+function validacionLogin() {
+    var user = document.getElementById('user').value;
+    var pass = document.getElementById('pass').value;
+    var userTag = document.getElementsByTagName('p')[0];
+    var passTag = document.getElementsByTagName('p')[1];
+
+    if (user == "" && pass == "") {
+        userTag.style.color = "red";
+        passTag.style.color = "red";
+        document.getElementById('user').style.borderColor = "red";
+        document.getElementById('pass').style.borderColor = "red";
+    } else if (user == "") {
+        userTag.style.color = "red";
+        passTag.style.color = "white";
+        document.getElementById('user').style.borderColor = "red";
+        document.getElementById('pass').style.borderColor = "white";
+    } else if (pass == "") {
+        userTag.style.color = "white";
+        passTag.style.color = "red";
+        document.getElementById('user').style.borderColor = "white";
+        document.getElementById('pass').style.borderColor = "red";
+    } else {
+        return true;
+    }
+    return false;
 }

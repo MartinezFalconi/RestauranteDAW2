@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2020 a las 15:13:09
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Tiempo de generación: 06-11-2020 a las 17:21:58
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -43,7 +44,8 @@ INSERT INTO `camareros` (`id_camarero`, `nombre_camarero`, `pass_camarero`, `idM
 (1, 'Xavier', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
 (2, 'Sergio', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
 (3, 'Judit', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
-(4, 'Marc', '81dc9bdb52d04dc20036dbd8313ed055', 1);
+(4, 'Marc', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(7, 'Pepe', '81dc9bdb52d04dc20036dbd8313ed055', 2);
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,8 @@ CREATE TABLE `mantenimiento` (
 --
 
 INSERT INTO `mantenimiento` (`idMantenimiento`, `numMante`) VALUES
-(1, '00001');
+(1, '00001'),
+(2, '00002');
 
 -- --------------------------------------------------------
 
@@ -184,7 +187,7 @@ ALTER TABLE `mesas`
 -- AUTO_INCREMENT de la tabla `camareros`
 --
 ALTER TABLE `camareros`
-  MODIFY `id_camarero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_camarero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `espacio`
@@ -196,13 +199,13 @@ ALTER TABLE `espacio`
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mesas`

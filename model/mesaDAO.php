@@ -146,13 +146,14 @@ class MesaDAO {
             $sentencia->bindParam(1,$disp_mesa);
             $sentencia->bindParam(2,$id_mesa);
             $sentencia->execute();
-            echo $query;
             
-            $query = "UPDATE horario SET hora_salida = NOW() WHERE id_mesa = ? AND hora_entrada = (SELECT MAX(hora_entrada) FROM horario);";
+            $query = "UPDATE horario, (SELECT MAX(hora_entrada) AS maximo FROM horario WHERE id_mesa = ?) AS tmax
+            SET horario.hora_salida = NOW()
+            WHERE horario.hora_entrada=tmax.maximo AND horario.id_mesa=?";
             $sentencia=$this->pdo->prepare($query);
             $sentencia->bindParam(1,$id_mesa);
+            $sentencia->bindParam(2,$id_mesa);
             $sentencia->execute();
-            echo $query;
 
             $this->pdo->commit();
             header('Location: '.$url);
@@ -224,7 +225,8 @@ class MesaDAO {
                 $this->pdo->commit();
                 header('Location: '.$url);
             }else {
-                echo "Usted no es de mantenimiento";
+                echo "<p class='msgMantenimiento'>Usted no es de mantenimiento</p>";
+                echo "<div class='btnVolverDiv'><a href='../view/zonaRestaurante.php?espacio={$espacio}' class='btnVolver'>Volver</a></div>";
             }
 
         } catch (Exception $e) {

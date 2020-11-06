@@ -8,6 +8,7 @@
     <body>
         <div class="nav"> 
             <!-- CONTROL DE SESIONES Y BOTONES -->
+            <!-- <img class="logo" src="../img/logo.png" alt="Logo restaurante"> -->
             <?php
                 require_once '../controller/sessionController.php';
             ?>
